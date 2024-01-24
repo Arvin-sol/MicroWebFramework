@@ -1,9 +1,18 @@
 ﻿
 namespace MicroWebFramework.Common;
-public abstract class BasePipe(Action<HttpContext> context)
-{
-    protected readonly Action<HttpContext> _context =context;
-    public abstract void Handler(HttpContext httpContext);
 
+
+public abstract class BasePipe
+{    
+    protected readonly Action<HttpContext> _context;
+    public BasePipe(Action<HttpContext> context)
+    {
+        _context = context;
+    }
+    public BasePipe()
+    {
+        _context = null;
+    }
+    public abstract void Handler(HttpContext httpContext);
 }
 

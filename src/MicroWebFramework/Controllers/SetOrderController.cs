@@ -24,7 +24,7 @@ public class SetOrderController(HttpContext httpContext)
         {
             WriteIndented = true
         });
-        _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes(ordersList));
+        _httpContext.Context.Response.OutputStream.Write(Encoding.UTF8.GetBytes(ordersList));
     }
 
 
@@ -32,10 +32,10 @@ public class SetOrderController(HttpContext httpContext)
     {
         if (!orders.Any(p => p.Id == id))
         {
-            _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes($"No order was found with id: {id}!"));
+            _httpContext.Context.Response.OutputStream.Write(Encoding.UTF8.GetBytes($"No order was found with id: {id}!"));
             return;
         }
-        _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes(orders.SingleOrDefault(p => p.Id == id).Name));
+        _httpContext.Context.Response.OutputStream.Write(Encoding.UTF8.GetBytes(orders.SingleOrDefault(p => p.Id == id).Name));
         return;
     }
 }

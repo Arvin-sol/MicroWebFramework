@@ -20,10 +20,10 @@ public class UserService(HttpContext httpContext) : IUserService
     {
         if (!users.Any(p => p.Id == id))
         {
-            _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes($"No user was found with id: {id}!!"));
+            _httpContext.Context.Response.OutputStream.Write(Encoding.UTF8.GetBytes($"No user was found with id: {id}!!"));
             return;
         }
-        _httpContext.Response.OutputStream.Write(
+        _httpContext.Context.Response.OutputStream.Write(
         Encoding.UTF8.GetBytes(
                     users.SingleOrDefault(p => p.Id == id).Name));
     }

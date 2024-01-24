@@ -33,18 +33,16 @@ void HandleRequest(HttpListenerContext httpContext)
 {
     try
     {
-        HttpContext request = new()
-        {
-            IP = httpContext.Request.RemoteEndPoint?.Address.ToString(),
-            Url = httpContext.Request.RawUrl,
-            Response = httpContext.Response,
-            Request = httpContext.Request
-        };
+        HttpContext request = new() { Context = httpContext };
+
+
 
         var pipeline = new PipelineBuilder()
-            .AddPipe(typeof(AuthenticationPipeline))
-            .AddPipe(typeof(EndPointPipeline))
+            .AddPipe<AuthenticationPipeline>()
+            .AddPipe<EndPointPipeline>()
             .Build();
+
+
 
         pipeline(request);
     }
